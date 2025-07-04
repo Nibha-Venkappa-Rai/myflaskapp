@@ -20,5 +20,4 @@ jobs:
     - name: Build the Docker image
       run: docker build -t pet_store_app_01 .
     - name: Push to Dockerhub
-      run: docker tag pet_store_app_01 nibhav/pet_store_app_01:latest
       run: docker push nibhav/pet_store_app_01:latest
