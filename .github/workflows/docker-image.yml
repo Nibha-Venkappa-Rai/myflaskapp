@@ -37,7 +37,7 @@ jobs:
         username: ${{secrets.EC2_USER}}
         key: ${{secrets.EC2_SSH_KEY}}
         source: ./deploy.sh
-        target: ~/deploy.sh
+        target: /home/ubuntu/deploy.sh
 
     - name: SSH and deploy to EC2
       uses: appleboy/ssh-action@v1.0.3   #action from market created by author appleboy to deploy script to ec2
