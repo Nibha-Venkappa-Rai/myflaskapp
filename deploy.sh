@@ -37,7 +37,7 @@ sleep 5
 
 HTTP_STATUS=$(curl -s -o /dev/null -w"%{http_code}" $HEALTHCHECK_URL)
 
-if [ $HTTP_STATUS -eq 200]; then
+if [ $HTTP_STATUS -eq 200 ]; then
     echo "App deployed successfully"
 else
     sudo docker stop $CONTAINER_NAME
