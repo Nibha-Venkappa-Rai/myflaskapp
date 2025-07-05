@@ -10,10 +10,10 @@ sudo systemctl enable docker
 #sudo docker rm pet_store_app_01 || true
 #sudo docker run -d --name pet_store_app_01 -p 80:5000 nibhav/pet_store_app_01:latest
 
-IMAGE_NAME= "$1"
-TAG_NAME= "$2"
-CONTAINER_NAME= "pet_store_app_01"
-HEALTHCHECK_URL= "http://16.170.221.115/health"
+IMAGE_NAME="$1"
+TAG_NAME="$2"
+CONTAINER_NAME="pet_store_app_01"
+HEALTHCHECK_URL="http://16.170.221.115/health"
 
 #Pulling new image
 sudo docker pull $IMAGE_NAME:$TAG_NAME || { echo "Pull failed"; exit 1; }
@@ -21,7 +21,7 @@ sudo docker pull $IMAGE_NAME:$TAG_NAME || { echo "Pull failed"; exit 1; }
 #Tagging existing image as previous
 if sudo docker ps -a --format '{{.Names}}' | grep -q $CONTAINER_NAME; then
     echo "Tagging current image as previous"
-    CURRENT_IMAGE= $(sudo docker inspect --format '{{.Config.Image}}' $CONTAINER_NAME)
+    CURRENT_IMAGE=$(sudo docker inspect --format '{{.Config.Image}}' $CONTAINER_NAME)
     sudo docker tag $CURRENT_IMAGE $IMAGE_NAME:previous
 fi 
 
