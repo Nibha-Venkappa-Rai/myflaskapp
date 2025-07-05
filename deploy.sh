@@ -10,8 +10,8 @@ sudo systemctl enable docker
 #sudo docker rm pet_store_app_01 || true
 #sudo docker run -d --name pet_store_app_01 -p 80:5000 nibhav/pet_store_app_01:latest
 
-IMAGE_NAME= $1
-TAG_NAME= $2
+IMAGE_NAME= "$1"
+TAG_NAME= "$2"
 CONTAINER_NAME= "pet_store_app_01"
 HEALTHCHECK_URL= "http://16.170.221.115/health"
 
