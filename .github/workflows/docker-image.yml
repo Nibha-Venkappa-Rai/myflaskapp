@@ -21,3 +21,23 @@ jobs:
       run: docker build -t nibhav/pet_store_app_01:latest .
     - name: Push to Dockerhub
       run: docker push nibhav/pet_store_app_01:latest
+    
+    - name: Copy deploy script to EC2
+      uses: appleboy/ssh-action@v0.1.7   #action from market created by author appleboy to copy script to ec2
+      with:
+        host: ${{secrets.EC2_HOST}}
+        username: ${{secrets.EC2_USER}}
+        key: ${{secrets.EC2_SSH_KEY}}
+        source: ./deploy.sh
+        target: ~/deploy.sh
+
+    - name: SSH and deploy to EC2
+      uses: appleboy/ssh-action@v1.0.3   #action from market created by author appleboy to deploy script to ec2
+      with:
+        host: ${{secrets.EC2_HOST}}
+        username: ${{secrets.EC2_USER}}
+        key: ${{secrets.EC2_SSH_KEY}}
+        script: |
+          chmod +x ~/deploy.sh
+          sudo ~/deploy.sh
+
