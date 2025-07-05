@@ -4,6 +4,9 @@ on:
   push:
     branches: [ "main" ]
 
+env:
+  IMAGE_NAME: nibhav/pet_store_app_01
+
 jobs:
 
   build:
@@ -20,14 +23,14 @@ jobs:
 
     - name: Build the Docker image
       run: |
-        docker build -t nibhav/pet_store_app_01:latest .
-        docker tag nibhav/pet_store_app_01:latest nibhav/pet_store_app_01:${{github.run_number}}
+        docker build -t $IMAGE_NAME:latest .
+        docker tag $IMAGE_NAME:latest $IMAGE_NAME:${{github.run_number}}
 
 
     - name: Push to Dockerhub
       run: |
-        docker push nibhav/pet_store_app_01:latest
-        docker push nibhav/pet_store_app_01:${{github.run_number}}
+        docker push $IMAGE_NAME:latest
+        docker push $IMAGE_NAME:${{github.run_number}}
     
     - name: Cleanup old deploy.sh
       uses: appleboy/ssh-action@v1.0.3
@@ -54,7 +57,8 @@ jobs:
         username: ${{secrets.EC2_USER}}
         key: ${{secrets.EC2_SSH_KEY}}
         script: |
-          TAG: ${{github.run_number}}
+          IMAGE= $IMAGE_NAME
+          TAG= ${{github.run_number}}
           chmod +x ~/deploy.sh
           sudo ~/deploy.sh nibhav/pet_store_app_01 $TAG
 
