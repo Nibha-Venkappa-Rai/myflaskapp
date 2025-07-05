@@ -56,5 +56,5 @@ jobs:
         script: |
           TAG: ${{github.run_number}}
           chmod +x ~/deploy.sh
-          sudo ~/deploy.sh nibhav/pet_store_app_01 TAG
+          sudo ~/deploy.sh nibhav/pet_store_app_01 $TAG
 
