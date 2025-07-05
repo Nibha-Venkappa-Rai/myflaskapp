@@ -23,7 +23,7 @@ jobs:
       run: docker push nibhav/pet_store_app_01:latest
     
     - name: Copy deploy script to EC2
-      uses: appleboy/ssh-action@v0.1.7   #action from market created by author appleboy to copy script to ec2
+      uses: appleboy/scp-action@v0.1.7   #action from market created by author appleboy to copy script to ec2
       with:
         host: ${{secrets.EC2_HOST}}
         username: ${{secrets.EC2_USER}}
